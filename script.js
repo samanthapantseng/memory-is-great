@@ -12,7 +12,7 @@ let secondCard = false;
 
 //items array
 const items = [];
-for (let i = 0; i < 12; i++) {
+for (let i = 0; i < 20; i++) {
     const item = {
         name: `munich-${i}`,
         image: `munich/munich-${i}.jpg`
@@ -51,13 +51,13 @@ const movesCounter = () => {
 };
 
 //pick random objects from the items array
-const generateRandom = (size = 4) => {
+const generateRandom = (size = 8) => {
     //temporary array
     let tempArray = [...items];
     //initializes cardValues array
     let cardValues = [];
     //size should be double (4*4 matrix)/2 since pairs of objects would exist
-    size = (size * size) / 2;
+    size = (size * 5) / 2;
     //random object selection
     for (let i = 0; i < size; i++) {
         const randomIndex = Math.floor(Math.random() * tempArray.length);
@@ -70,7 +70,7 @@ const generateRandom = (size = 4) => {
     return cardValues;
 };
 
-const matrixGenerator = (cardValues, size = 4) => {
+const matrixGenerator = (cardValues, size = 8) => {
     gameContainer.innerHTML = "";
     cardValues = [...cardValues, ...cardValues];
     //simple shuffle
@@ -80,7 +80,7 @@ const matrixGenerator = (cardValues, size = 4) => {
     if it returns positive, 2nd elemnt, is sorted before 1st
     if 0, order remains unchanged
     */
-    for (let i = 0; i < size * size; i++) {
+    for (let i = 0; i < size * 5; i++) {
         /* 
             Create Cards
             before => front side (?)
@@ -99,6 +99,7 @@ const matrixGenerator = (cardValues, size = 4) => {
         `;
     }
     gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`;
+    gameContainer.style.gridTemplateRows = `repeat(5,auto)`;
 
     //cards
     cards = document.querySelectorAll(".card-container");
