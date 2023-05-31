@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,9 +14,9 @@ img {
     height: 100%;
 }
 
-.wrapper{
+.wrapper {
     box-sizing: content-box;
-    width: 26.87em;
+    width: fit-content;
     padding: 2.5em 3em;
     background-color: white;
     position: absolute;
@@ -25,25 +25,29 @@ img {
     top: 50%;
     border-radius: 0.6em;
     box-shadow: 0 0.9em 2.8em darkmagenta;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.game-container{
+.game-container {
     position: relative;
-    width: 100%;
+    width: fit-content;
+    margin: 0 auto;
     display: grid;
     gap: 0.6em;
 }
 
-.stats-container{
+.stats-container {
     text-align: right;
     margin-bottom: 1.2em;
 }
 
-.stats-container span{
+.stats-container span {
     font-weight: 600;
 }
 
-.card-container{
+.card-container {
     position:  relative;
     width: 6.25em;
     height: 6.25em;
@@ -64,22 +68,22 @@ img {
     backface-visibility: hidden;
 }
 
-.card-before{
+.card-before {
     background-color: darkmagenta;
     font-size: 2.8em;
     font-weight: 600;
 }
 
-.card-after{
+.card-after {
     background-color: white;
     transform: rotateY(180deg);
 }
 
-.card-container.flipped .card-before{
+.card-container.flipped .card-before {
     transform: rotateY(180deg);
 }
 
-.card-container.flipped .card-after{
+.card-container.flipped .card-after {
     transform: rotateY(0deg);
 }
 
@@ -103,9 +107,9 @@ button {
 }
 
 #stop {
-    font-size: 1.1em;
+    font-size: 1em;
     display: block;
-    margin: 1.1em auto 0 auto;
+    margin: 1em auto 0 auto;
     background-color: black;
     color: white;
 }
