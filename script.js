@@ -137,7 +137,7 @@ const matrixGenerator = (cardValues, size = 8) => {
                         winCount += 1;
                         //check if winCount == half of the cardValue
                         if (winCount == Math.floor(cardValues.length / 2)) {
-                            result.innerHTML = `<h2>Your Memory is Great!</h2>
+                            result.innerHTML = `<h2>WOW! YOU HAVE SUCH A GREAT MEMORY!</h2>
                         <h4>Moves: ${movesCount}</h4>`;
                             stopGame();
                         }
