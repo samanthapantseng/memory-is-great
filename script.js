@@ -91,7 +91,7 @@ const matrixGenerator = (cardValues, size = 8) => {
         gameContainer.innerHTML +=
             `
         <div class="card-container" data-card-value=" ${cardValues[i].name}">
-            <div class="card-before">?</div>
+            <div class="card-before">:)</div>
             <div class="card-after"> 
                 <img src="${cardValues[i].image}" class="image"/> 
             </div>
@@ -157,6 +157,8 @@ const matrixGenerator = (cardValues, size = 8) => {
         });
     });
 };
+
+
 
 //start game
 startButton.addEventListener("click", () => {
