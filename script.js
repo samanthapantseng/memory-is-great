@@ -3,6 +3,8 @@ const timeValue = document.getElementById('time');
 const pairs = document.getElementById('pairs');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
+const wrapper = document.getElementById('wrapper');
+
 const gameContainer = document.querySelector('.game-container');
 const result = document.getElementById('result');
 const controls = document.querySelector('.controls-container');
@@ -14,6 +16,7 @@ let secondCard = false;
 //items array
 let items = [];
 
+//choose which place for memory
 function setPlaceOption() {
   var value = document.getElementsByName('place');
   for (var radio of value) {
@@ -162,17 +165,10 @@ const matrixGenerator = (cardValues, cols, rows) => {
             //if both cards match add matched class so these cards would be ignored next time
             firstCard.classList.add('matched');
             secondCard.classList.add('matched');
-            //also hide them after 1500 miliseconds by hiding all child elements
-            var firstCardChilds = firstCard.querySelectorAll('*');
-            var secondCardChilds = secondCard.querySelectorAll('*');
-            setTimeout(() => {
-              firstCardChilds.forEach((child) => {
-                child.classList.add('hide');
-              });
-              secondCardChilds.forEach((child) => {
-                child.classList.add('hide');
-              });
-            }, 2000);
+            //animation for spinner
+            firstCard.classList.add('spinner');
+            secondCard.classList.add('spinner');
+
             //set firstCard to flase since next card would be firstCard now
             firstCard = false;
             //winCount increment as user found a correct match
@@ -193,7 +189,7 @@ const matrixGenerator = (cardValues, cols, rows) => {
             setTimeout(() => {
               tempFirst.classList.remove('flipped');
               tempSecond.classList.remove('flipped');
-            }, 900);
+            }, 1300);
           }
         }
       }
@@ -214,6 +210,7 @@ startButton.addEventListener('click', () => {
   stopButton.classList.remove('hide');
   startButton.classList.add('hide');
   //initialize according to the dificulty
+  wrapper.classList.add("appear");
   var value = document.getElementsByName('dificulty');
   for (var radio of value) {
     if (radio.checked) {
@@ -242,6 +239,7 @@ stopButton.addEventListener(
     controls.classList.remove('hide');
     stopButton.classList.add('hide');
     startButton.classList.remove('hide');
+    wrapper.classList.remove("appear");
     setDificultyOptions();
     clearInterval(interval);
   })

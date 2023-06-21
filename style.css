@@ -76,7 +76,7 @@ img {
     box-sizing: content-box;
     width: 80%;
     padding: 2.5em 0em;
-    background-color: #db0000;
+    background-color: white;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -98,7 +98,7 @@ img {
     width: 100%;
     aspect-ratio: 1 / 1;
     cursor: pointer;
-    color: #db0000;
+    color: white;
 }
 
 .card-before,
@@ -115,12 +115,12 @@ img {
 }
 
 .card-before {
-    background-color: white;
+    background-color: #db0000;
     font-weight: 600;
 }
 
 .card-after {
-    background-color: white;
+    background-color: #db0000;
     transform: rotateY(180deg);
 }
 
@@ -155,7 +155,7 @@ button {
 }
 
 .stats-container {
-    color: white;
+    color: #db0000;
     word-wrap: break-word;
     width: 80%;
     text-align: center;
@@ -164,9 +164,13 @@ button {
 #stop {
     word-wrap: break-word;
     display: block;
-    background-color: white;
-    color: #db0000;
+    background-color: #db0000;
+    color: white;
     text-align: center;
+}
+
+#stop:hover {
+    animation: infiniteSpinner 1.2s linear infinite;
 }
 
 .controls-container button {
@@ -175,9 +179,17 @@ button {
     font-size: 1.3em;
 }
 
+.controls-container button:hover {
+    animation: infiniteSpinner 1.2s linear infinite;
+}
+
 .option-container {
     position: absolute;
     accent-color: #db0000;
+}
+
+.option-container input[name="place"] {
+    accent-color: blue;
 }
 
 .option-container label {
@@ -187,6 +199,58 @@ button {
 .hide {
     display: none;
 }
+
+.spinner {
+    animation: matchedSpinner 4s forwards;
+    animation-delay: 1s;
+}
+
+.appear {
+    animation: instantAppear 1s;
+}
+
+@keyframes infiniteSpinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes matchedSpinner {
+    from {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+    25% {
+        opacity: 1;
+        transform: rotate(-45deg);
+    }
+    80% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+    99% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+    to {
+        opacity: 0;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes instantAppear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+
+}
+
 
 #result {
     text-align: center;
