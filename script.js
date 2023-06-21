@@ -12,14 +12,35 @@ let firstCard = false;
 let secondCard = false;
 
 //items array
-const items = [];
-for (let i = 0; i < 35; i++) {
-  const item = {
-    name: `munich-${i}`,
-    image: `munich/munich-${i}.jpg`,
-  };
-  items.push(item);
-}
+let items = [];
+
+function setPlaceOption() {
+  var value = document.getElementsByName('place');
+  for (var radio of value) {
+    if (radio.checked) {
+      switch (radio.value) {
+        case 'Berlin':
+          for (let i = 0; i < 35; i++) {
+            const item = {
+              name: `berlin-${i}`,
+              image: `berlin/berlin-${i}.jpg`,
+            };
+            items.push(item);
+          }
+          break;
+        case 'Munich':
+          for (let i = 0; i < 35; i++) {
+            const item = {
+              name: `munich-${i}`,
+              image: `munich/munich-${i}.jpg`,
+            };
+            items.push(item);
+          }
+          break;
+      }
+    }
+  }
+} 
 
 //initial time
 let seconds = 0,
@@ -151,12 +172,12 @@ const matrixGenerator = (cardValues, cols, rows) => {
               secondCardChilds.forEach((child) => {
                 child.classList.add('hide');
               });
-            }, 1500);
+            }, 2000);
             //set firstCard to flase since next card would be firstCard now
             firstCard = false;
             //winCount increment as user found a correct match
             winCount += 1;
-            pairs.innerHTML = `<span>Pairs: </span> ${winCount}/${cols * rows}`;
+            pairs.innerHTML = `<span>Pairs: </span> ${winCount}/${(cols * rows)/2}`;
             //check if winCount == half of the cardValue
             if (winCount == Math.floor(cardValues.length / 2)) {
               result.innerHTML = `<h2>WOW! YOU HAVE SUCH A GREAT MEMORY!</h2>
@@ -186,6 +207,8 @@ startButton.addEventListener('click', () => {
   seconds = 0;
   minutes = 0;
   firstMove = true;
+  items = [];
+  setPlaceOption();
   //controls and buttons visibility
   controls.classList.add('hide');
   stopButton.classList.remove('hide');
@@ -229,7 +252,7 @@ const initializer = (cols, rows) => {
   //initial moves
   moves.innerHTML = `<span>Moves: </span> ${movesCount}`;
   timeValue.innerHTML = `<span>Time: 00:00</span>`;
-  pairs.innerHTML = `<span>Pairs: </span> 0/${cols * rows}`;
+  pairs.innerHTML = `<span>Pairs: </span> 0/${(cols * rows)/2}`;
   result.innerHTML = '';
   winCount = 0;
   let cardValues = generateRandom(cols, rows);
