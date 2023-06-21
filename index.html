@@ -15,16 +15,40 @@
         <div class="stats-container">
           <div id="moves-count"></div>
           <div id="time"></div>
+          <div id="pairs"></div>
         </div>
       </div>
       <div class="game-container"></div>
       <div class="lateral-container">
-        <button id="stop" class="hide">Stop Game</button>
+        <button id="stop" class="hide">Quit</button>
       </div>
     </div>
     <div class="controls-container">
       <p id="result"></p>
-      <button id="start">Start Game</button>
+      <button id="start">Load Game</button>
+      
+      <div class="option-container">
+        <input
+          type="radio"
+          id="Easy"
+          name="dificulty"
+          value="Easy"
+          checked="checked"
+        />
+        <label for="Easy">Easy</label>
+      </div>
+      <div class="option-container">
+        <input type="radio" id="Medium" name="dificulty" value="Medium" />
+        <label for="Medium">Medium</label>
+      </div>
+      <div class="option-container">
+        <input type="radio" id="Hard" name="dificulty" value="Hard" />
+        <label for="Hard">Hard</label>
+      </div>
+      <div class="option-container">
+        <input type="radio" id="Very Hard" name="dificulty" value="Very Hard" />
+        <label for="Very Hard">Very Hard</label>
+      </div>
     </div>
 
     <script src="script.js"></script>
