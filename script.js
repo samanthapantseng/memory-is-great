@@ -13,7 +13,7 @@ let secondCard = false;
 
 //items array
 const items = [];
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 35; i++) {
   const item = {
     name: `munich-${i}`,
     image: `munich/munich-${i}.jpg`,
