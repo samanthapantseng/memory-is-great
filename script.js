@@ -4,7 +4,7 @@ const pairs = document.getElementById('pairs');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const wrapper = document.getElementById('wrapper');
-
+const againButton = document.getElementById('again');
 const gameContainer = document.querySelector('.game-container');
 const result = document.getElementById('result');
 const controls = document.querySelector('.controls-container');
@@ -176,9 +176,9 @@ const matrixGenerator = (cardValues, cols, rows) => {
             pairs.innerHTML = `<span>Pairs: </span> ${winCount}/${(cols * rows)/2}`;
             //check if winCount == half of the cardValue
             if (winCount == Math.floor(cardValues.length / 2)) {
-              result.innerHTML = `<h2>WOW! YOU HAVE SUCH A GREAT MEMORY!</h2>
-                        <h4>Moves: ${movesCount}</h4>`;
-              stopGame();
+              result.innerHTML = `<p>wow! u have such a good memory</p>
+                        <p>moves: ${movesCount}</p>`;
+              winGame();
             }
           } else {
             //if card dont match
@@ -245,12 +245,24 @@ stopButton.addEventListener(
   })
 );
 
+//play again
+againButton.addEventListener('click', stopGame
+);
+
+function winGame() {
+  controls.classList.add('hide');
+  stopButton.classList.add('hide');
+  wrapper.classList.add('hide');
+  clearInterval(interval);
+  againButton.classList.remove('hide');
+}
+
 //initialize values and func calls
 const initializer = (cols, rows) => {
   //initial moves
-  moves.innerHTML = `<span>Moves: </span> ${movesCount}`;
-  timeValue.innerHTML = `<span>Time: 00:00</span>`;
-  pairs.innerHTML = `<span>Pairs: </span> 0/${(cols * rows)/2}`;
+  moves.innerHTML = `<span>moves: </span> ${movesCount}`;
+  timeValue.innerHTML = `<span>time: 00:00</span>`;
+  pairs.innerHTML = `<span>pairs: </span> 0/${(cols * rows)/2}`;
   result.innerHTML = '';
   winCount = 0;
   let cardValues = generateRandom(cols, rows);
@@ -260,13 +272,21 @@ const initializer = (cols, rows) => {
 };
 
 function setDificultyOptions() {
-  const optionContainers = document.querySelectorAll('.option-container');
-  // Loop through each element with the class .option-container
-  optionContainers.forEach((option) => {
-    option.style.left =
-      Math.floor(Math.random() * (window.innerWidth - 100)) + 'px';
-    option.style.top =
-      Math.floor(Math.random() * (window.innerHeight - 100)) + 'px';
+  const dificultyOptions = document.querySelectorAll('input[name="dificulty"]');
+  const placeOptions = document.querySelectorAll('input[name="place"]');
+  
+  setOptionsRandomPosition(dificultyOptions, 'upper');
+  setOptionsRandomPosition(placeOptions, 'lower');
+}
+
+function setOptionsRandomPosition(options, position) {
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
+  const maxTop = screenHeight / 2 - 100; 
+
+  options.forEach((option) => {
+    option.parentElement.style.left = Math.floor(Math.random() * (screenWidth - 100)) + 'px';
+    option.parentElement.style.top = position === 'upper' ? Math.floor(Math.random() * maxTop) + 'px' : Math.floor(Math.random() * maxTop + screenHeight / 2) + 'px';
   });
 }
 
