@@ -11,8 +11,12 @@ const result = document.getElementById('result');
 const winScreen = document.getElementById('win');
 const controls = document.querySelector('.controls-container');
 
+
 //Import audio files
-const clickAudio = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
+const clickAudio = new Audio('flip.mp3');
+const matchAudio = new Audio('yay.mp3');
+
+const quitAudio = new Audio('boo-womp.mp3');
 
 let cards;
 let interval;
@@ -74,13 +78,13 @@ const timeGenerator = () => {
   //format time before displaying
   let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
   let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
-  timeValue.innerHTML = `<span>Time: </span>${minutesValue}:${secondsValue}`;
+  timeValue.innerHTML = `<span>time: </span>${minutesValue}:${secondsValue}`;
 };
 
 //for calculating moves
 const movesCounter = () => {
   movesCount += 1;
-  moves.innerHTML = `<span>Moves: </span>${movesCount}`;
+  moves.innerHTML = `<span>moves: </span>${movesCount}`;
 };
 
 //pick random objects from the items array
@@ -104,6 +108,7 @@ const generateRandom = (cols, rows) => {
 };
 
 const matrixGenerator = (cardValues, cols, rows) => {
+  
   gameContainer.innerHTML = '';
   cardValues = [...cardValues, ...cardValues];
   //simple shuffle
@@ -114,6 +119,38 @@ const matrixGenerator = (cardValues, cols, rows) => {
     if 0, order remains unchanged
     */
   for (let i = 0; i < cols * rows; i++) {
+
+    var value = document.getElementsByName('place');
+    for (var radio of value) {
+      if (radio.checked) {
+        switch (radio.value) {
+          case 'Berlin':
+              gameContainer.innerHTML += `
+              <div class="card-container" data-card-value=" ${cardValues[i].name}">
+                  <div class="card-before">
+                    <img src=placeholder/berlin-placeholder.png class="image"/>
+                  </div>
+                  <div class="card-after"> 
+                      <img src="${cardValues[i].image}" class="image"/> 
+                  </div>
+              </div>
+              `;
+            break;
+          case 'Munich':
+              gameContainer.innerHTML += `
+              <div class="card-container" data-card-value=" ${cardValues[i].name}">
+                  <div class="card-before">
+                    <img src=placeholder/munich-placeholder.png class="image"/>
+                  </div>
+                  <div class="card-after"> 
+                      <img src="${cardValues[i].image}" class="image"/> 
+                  </div>
+              </div>
+              `;
+            
+        }
+      }
+    }
     /* 
             Create Cards
             before => front side (?)
@@ -121,16 +158,6 @@ const matrixGenerator = (cardValues, cols, rows) => {
             data-card-value is a custom attribute which stores 
             names of cards to match later
         */
-    gameContainer.innerHTML += `
-        <div class="card-container" data-card-value=" ${cardValues[i].name}">
-            <div class="card-before">
-              <img src=placeholder/placeholder.jpg class="image"/>
-            </div>
-            <div class="card-after"> 
-                <img src="${cardValues[i].image}" class="image"/> 
-            </div>
-        </div>
-        `;
   }
   gameContainer.style.gridTemplateColumns = `repeat(${cols},auto)`;
   gameContainer.style.gridTemplateRows = `repeat(${rows},auto)`;
@@ -170,6 +197,7 @@ const matrixGenerator = (cardValues, cols, rows) => {
           let secondCardValue = card.getAttribute('data-card-value');
 
           if (firstCardValue == secondCardValue) {
+            matchAudio.cloneNode().play();
             //if both cards match add matched class so these cards would be ignored next time
             firstCard.classList.add('matched');
             secondCard.classList.add('matched');
@@ -185,9 +213,13 @@ const matrixGenerator = (cardValues, cols, rows) => {
               (cols * rows) / 2
             }`;
             //check if winCount == half of the cardValue
+            const timeTaken = timeValue.innerText;
             if (winCount == Math.floor(cardValues.length / 2)) {
               result.innerHTML = `<p>wow! u have such a good memory</p>
-                        <p>moves: ${movesCount}</p>`;
+                        <br />
+                        <p>moves: ${movesCount}</p>
+                        <p>${timeTaken}</p>
+                        `;
               winGame();
             }
           } else {
@@ -226,20 +258,20 @@ startButton.addEventListener('click', () => {
   for (var radio of value) {
     if (radio.checked) {
       switch (radio.value) {
-        case 'Easy':
+        case 'easy':
           initializer(6, 5);
           break;
-        case 'Medium':
+        case 'medium':
           initializer(8, 5);
           break;
-        case 'Hard':
+        case 'hard':
           initializer(10, 5);
           break;
-        case 'Very Hard':
+        case 'very hard':
           initializer(10, 7);
           break;
       }
-      difficulty.innerHTML = `<span>Difficulty: </span>${radio.value}`;
+      difficulty.innerHTML = `<span>difficulty: </span>${radio.value}`;
     }
   }
 });
@@ -248,6 +280,7 @@ startButton.addEventListener('click', () => {
 stopButton.addEventListener(
   'click',
   (stopGame = () => {
+    quitAudio.cloneNode().play();
     controls.classList.remove('hide');
     stopButton.classList.add('hide');
     startButton.classList.remove('hide');
@@ -267,6 +300,7 @@ function winGame() {
   wrapper.classList.add('hide');
   clearInterval(interval);
   againButton.classList.remove('hide');
+
 }
 
 //initialize values and func calls

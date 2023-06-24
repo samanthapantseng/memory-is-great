@@ -88,7 +88,7 @@ img {
 }
 
 .card-before {
-    background-color: #db0000;
+    background-color: #000000;
     font-weight: 600;
 }
 
@@ -148,7 +148,7 @@ img {
 .top-container {
     display: flex;
     justify-content: center;
-    color: #db0000;
+    color: #000000;
     word-wrap: break-word;
     width: 80%;
     text-align: center;
@@ -159,7 +159,7 @@ img {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    color: #db0000;
+    color: #000000;
     word-wrap: break-word;
     margin-top: 1em;
     align-items: center;
@@ -177,7 +177,7 @@ button {
 #stop {
     word-wrap: break-word;
     display: block;
-    background-color: #db0000;
+    background-color: #000000;
     color: white;
     text-align: center;
 }
@@ -285,7 +285,6 @@ button {
     }
 
 }
-
 
 #result {
     text-align: center;
