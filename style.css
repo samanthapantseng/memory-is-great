@@ -15,7 +15,7 @@ img {
 }
 
 /* Wide screen */
-@media screen and (min-width: 1150px) {
+@media screen and (min-width: 750px) {
     #stop {
         font-size: 1em;
     }
@@ -24,13 +24,13 @@ img {
         padding: 1em 1em;
     }
 
-    .stats-container {
+    .top-container, .bottom-container {
         font-size: 1em;
     }
 }
 
 /* Medium screen */
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 750px) {
     #stop {
         font-size: 0.8em;
     }
@@ -39,50 +39,8 @@ img {
         padding: 0.5em 0.5em;
     }
 
-    .stats-container {
+    .top-container, .bottom-container {
         font-size: 0.8em;
-    }
-}
-
-/* Wide screen */
-@media screen and (min-width: 750px) {
-    .wrapper {
-        flex-direction: row;
-    }
-
-    .lateral-container {
-        width: 10%;
-    }
-
-    #stop {
-        width: 80%;
-    }
-
-    .card-before {
-        font-size: 2.8em;
-    }
-}
-
-/* Mobile screen */
-@media screen and (max-width: 750px) {
-    .wrapper {
-        flex-direction: column;
-    }
-
-    .lateral-container {
-        width: 100%;
-    }
-
-    #stop {
-        margin-top: 1em;
-    }
-
-    .stats-container {
-        margin-bottom: 1em;
-    }
-
-    .card-before {
-        font-size: 1.2em;
     }
 }
 
@@ -98,6 +56,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .game-container {
@@ -109,7 +68,7 @@ img {
 
 .card-container {
     position: relative;
-    width: 100%;
+    max-height: 15vh;
     aspect-ratio: 1 / 1;
     cursor: pointer;
     color: white;
@@ -186,9 +145,24 @@ img {
     align-self: center;
 }
 
-.lateral-container {
+.top-container {
     display: flex;
     justify-content: center;
+    color: #db0000;
+    word-wrap: break-word;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    color: #db0000;
+    word-wrap: break-word;
+    margin-top: 1em;
+    align-items: center;
 }
 
 button {
@@ -196,11 +170,8 @@ button {
     cursor: pointer;
 }
 
-.stats-container {
-    color: #db0000;
-    word-wrap: break-word;
-    width: 80%;
-    text-align: center;
+.stats-text {
+    width: 33.33%;
 }
 
 #stop {

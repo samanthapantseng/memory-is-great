@@ -1,78 +1,88 @@
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>memory is great!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>memory is great!</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <div id="wrapper" class="wrapper">
-    <div class="lateral-container">
-      <div class="stats-container">
-        <div id="moves-count"></div>
-        <div id="time"></div>
-        <div id="pairs"></div>
+  <body>
+    <div id="wrapper" class="wrapper">
+      <div class="top-container">
+        <div id="time" class="stats-text"></div>
+        <div id="moves-count" class="stats-text"></div>
+        <div id="pairs" class="stats-text"></div>
+      </div>
+      <div class="game-container"></div>
+      <div class="bottom-container">
+        <div id="difficulty"></div>
+        <button id="stop" class="hide">quit</button>
       </div>
     </div>
-    <div class="game-container"></div>
-    <div class="lateral-container">
-      <button id="stop" class="hide">quit</button>
-    </div>
-  </div>
 
-  <div class="win-container">
-    <p id="result"></p>
-    <button id="again" class="hide">play again</button>
-  </div>
-
-  <div class="controls-container">
-
-    <p>oh! u <3 memory games 2? <br> <br> 
-      please, choose <br> 
-      the difficulty <span style="color: red;">[red]</span> <br> 
-      & the theme <span style="color: blue;">[blue]</span> <br>  
-    </p>
-    <br>
-    <button id="start">start game</button>
-
-    <div class="option-container">
-      <input type="radio" id="Easy" name="dificulty" value="Easy" checked="checked" />
-      <label for="Easy">easy</label>
+    <div id="win" class="win-container">
+      <p id="result"></p>
+      <button id="again" class="hide">play again</button>
     </div>
 
-    <div class="option-container">
-      <input type="radio" id="Medium" name="dificulty" value="Medium" />
-      <label for="Medium">medium</label>
+    <div class="controls-container">
+      <p>
+        oh! u <3 memory games 2?
+        <br />
+        <br />
+        please, choose <br />
+        the difficulty <span style="color: red">[red]</span> <br />
+        & the theme <span style="color: blue">[blue]</span> <br />
+      </p>
+      <br />
+      <button id="start">start game</button>
+
+      <div class="option-container">
+        <input
+          type="radio"
+          id="Easy"
+          name="dificulty"
+          value="Easy"
+          checked="checked"
+        />
+        <label for="Easy">easy</label>
+      </div>
+
+      <div class="option-container">
+        <input type="radio" id="Medium" name="dificulty" value="Medium" />
+        <label for="Medium">medium</label>
+      </div>
+
+      <div class="option-container">
+        <input type="radio" id="Hard" name="dificulty" value="Hard" />
+        <label for="Hard">hard</label>
+      </div>
+
+      <div class="option-container">
+        <input type="radio" id="Very Hard" name="dificulty" value="Very Hard" />
+        <label for="Very Hard">very hard</label>
+      </div>
+
+      <div class="option-container">
+        <input
+          type="radio"
+          id="Berlin"
+          name="place"
+          value="Berlin"
+          checked="checked"
+        />
+        <label for="Berlin">berlin</label>
+      </div>
+
+      <div class="option-container">
+        <input type="radio" id="Munich" name="place" value="Munich" />
+        <label for="Munich">münchen</label>
+      </div>
     </div>
 
-    <div class="option-container">
-      <input type="radio" id="Hard" name="dificulty" value="Hard" />
-      <label for="Hard">hard</label>
-    </div>
-
-    <div class="option-container">
-      <input type="radio" id="Very Hard" name="dificulty" value="Very Hard" />
-      <label for="Very Hard">very hard</label>
-    </div>
-
-    <div class="option-container">
-      <input type="radio" id="Berlin" name="place" value="Berlin" checked="checked" />
-      <label for="Berlin">berlin</label>
-    </div>
-
-    <div class="option-container">
-      <input type="radio" id="Munich" name="place" value="Munich" />
-      <label for="Munich">münchen</label>
-    </div>
-
-  </div>
-
-  <script src="script.js"></script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>

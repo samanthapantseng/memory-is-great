@@ -1,13 +1,19 @@
 const moves = document.getElementById('moves-count');
 const timeValue = document.getElementById('time');
 const pairs = document.getElementById('pairs');
+const difficulty = document.getElementById('difficulty');
 const startButton = document.getElementById('start');
 const stopButton = document.getElementById('stop');
 const wrapper = document.getElementById('wrapper');
 const againButton = document.getElementById('again');
 const gameContainer = document.querySelector('.game-container');
 const result = document.getElementById('result');
+const winScreen = document.getElementById('win');
 const controls = document.querySelector('.controls-container');
+
+//Import audio files
+const clickAudio = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
+
 let cards;
 let interval;
 let firstCard = false;
@@ -43,7 +49,7 @@ function setPlaceOption() {
       }
     }
   }
-} 
+}
 
 //initial time
 let seconds = 0,
@@ -117,7 +123,9 @@ const matrixGenerator = (cardValues, cols, rows) => {
         */
     gameContainer.innerHTML += `
         <div class="card-container" data-card-value=" ${cardValues[i].name}">
-            <div class="card-before">:)</div>
+            <div class="card-before">
+              <img src=placeholder/placeholder.jpg class="image"/>
+            </div>
             <div class="card-after"> 
                 <img src="${cardValues[i].image}" class="image"/> 
             </div>
@@ -131,6 +139,8 @@ const matrixGenerator = (cardValues, cols, rows) => {
   cards = document.querySelectorAll('.card-container');
   cards.forEach((card) => {
     card.addEventListener('click', () => {
+      //play the click sound effect
+      clickAudio.cloneNode().play();
       //if this is the first card clicked, start the timer
       if (firstMove) {
         interval = setInterval(timeGenerator, 1000);
@@ -152,14 +162,12 @@ const matrixGenerator = (cardValues, cols, rows) => {
           firstCard = card;
           //current cards value becomes firstCardValue
           firstCardValue = card.getAttribute('data-card-value');
-          console.log(firstCardValue);
         } else {
           //increment moves since user selected second card
           movesCounter();
           //secondCard and value
           secondCard = card;
           let secondCardValue = card.getAttribute('data-card-value');
-          console.log(secondCardValue);
 
           if (firstCardValue == secondCardValue) {
             //if both cards match add matched class so these cards would be ignored next time
@@ -173,7 +181,9 @@ const matrixGenerator = (cardValues, cols, rows) => {
             firstCard = false;
             //winCount increment as user found a correct match
             winCount += 1;
-            pairs.innerHTML = `<span>Pairs: </span> ${winCount}/${(cols * rows)/2}`;
+            pairs.innerHTML = `<span>Pairs: </span> ${winCount}/${
+              (cols * rows) / 2
+            }`;
             //check if winCount == half of the cardValue
             if (winCount == Math.floor(cardValues.length / 2)) {
               result.innerHTML = `<p>wow! u have such a good memory</p>
@@ -209,8 +219,9 @@ startButton.addEventListener('click', () => {
   controls.classList.add('hide');
   stopButton.classList.remove('hide');
   startButton.classList.add('hide');
+  winScreen.classList.add('hide');
   //initialize according to the dificulty
-  wrapper.classList.add("appear");
+  wrapper.classList.add('appear');
   var value = document.getElementsByName('dificulty');
   for (var radio of value) {
     if (radio.checked) {
@@ -228,6 +239,7 @@ startButton.addEventListener('click', () => {
           initializer(10, 7);
           break;
       }
+      difficulty.innerHTML = `<span>Difficulty: </span>${radio.value}`;
     }
   }
 });
@@ -239,17 +251,17 @@ stopButton.addEventListener(
     controls.classList.remove('hide');
     stopButton.classList.add('hide');
     startButton.classList.remove('hide');
-    wrapper.classList.remove("appear");
-    setDificultyOptions();
+    wrapper.classList.remove('appear');
+    setGameOptions();
     clearInterval(interval);
   })
 );
 
 //play again
-againButton.addEventListener('click', stopGame
-);
+againButton.addEventListener('click', stopGame);
 
 function winGame() {
+  winScreen.classList.remove('hide');
   controls.classList.add('hide');
   stopButton.classList.add('hide');
   wrapper.classList.add('hide');
@@ -262,7 +274,7 @@ const initializer = (cols, rows) => {
   //initial moves
   moves.innerHTML = `<span>moves: </span> ${movesCount}`;
   timeValue.innerHTML = `<span>time: 00:00</span>`;
-  pairs.innerHTML = `<span>pairs: </span> 0/${(cols * rows)/2}`;
+  pairs.innerHTML = `<span>pairs: </span> 0/${(cols * rows) / 2}`;
   result.innerHTML = '';
   winCount = 0;
   let cardValues = generateRandom(cols, rows);
@@ -271,23 +283,29 @@ const initializer = (cols, rows) => {
   else matrixGenerator(cardValues, rows, cols);
 };
 
-function setDificultyOptions() {
+function setGameOptions() {
   const dificultyOptions = document.querySelectorAll('input[name="dificulty"]');
   const placeOptions = document.querySelectorAll('input[name="place"]');
-  
+  const playerOptions = document.querySelectorAll('input[name="players"]');
+
   setOptionsRandomPosition(dificultyOptions, 'upper');
   setOptionsRandomPosition(placeOptions, 'lower');
+  setOptionsRandomPosition(playerOptions, 'lower');
 }
 
 function setOptionsRandomPosition(options, position) {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
-  const maxTop = screenHeight / 2 - 100; 
+  const maxTop = screenHeight / 2 - 100;
 
   options.forEach((option) => {
-    option.parentElement.style.left = Math.floor(Math.random() * (screenWidth - 100)) + 'px';
-    option.parentElement.style.top = position === 'upper' ? Math.floor(Math.random() * maxTop) + 'px' : Math.floor(Math.random() * maxTop + screenHeight / 2) + 'px';
+    option.parentElement.style.left =
+      Math.floor(Math.random() * (screenWidth - 100)) + 'px';
+    option.parentElement.style.top =
+      position === 'upper'
+        ? Math.floor(Math.random() * maxTop) + 'px'
+        : Math.floor(Math.random() * maxTop + screenHeight / 2) + 'px';
   });
 }
 
-setDificultyOptions();
+setGameOptions();
