@@ -284,7 +284,10 @@ stopButton.addEventListener(
     controls.classList.remove('hide');
     stopButton.classList.add('hide');
     startButton.classList.remove('hide');
+    againButton.classList.add('hide');
     wrapper.classList.remove('appear');
+    wrapper.classList.remove('hide');
+    winScreen.classList.add('hide');
     setGameOptions();
     clearInterval(interval);
   })
